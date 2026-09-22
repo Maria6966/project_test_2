@@ -3,14 +3,229 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Генератор идей для постов</title>
+  <title>10 идей</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #16110e;
+      --card: rgba(42, 32, 26, 0.72);
+      --card-hover: rgba(58, 44, 34, 0.9);
+      --ink: #f6efe6;
+      --muted: #c9b8a6;
+      --accent: #e8a87c;
+      --accent-soft: rgba(232, 168, 124, 0.18);
+      --line: rgba(246, 239, 230, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    .glow {
+      position: fixed;
+      inset: auto;
+      width: 42vw;
+      height: 42vw;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: drift 14s ease-in-out infinite alternate;
+    }
+
+    .glow-a {
+      top: -12vw;
+      left: -8vw;
+      background: #5a3724;
+    }
+
+    .glow-b {
+      right: -10vw;
+      bottom: -14vw;
+      background: #3d2a4a;
+      animation-delay: -6s;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 72px 24px 88px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: rise 0.8s ease 0.1s forwards;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 18px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3.4rem, 9vw, 6.4rem);
+      font-weight: 500;
+      line-height: 0.9;
+      margin: 18px 0 14px;
+      opacity: 0;
+      animation: rise 0.9s ease 0.2s forwards;
+    }
+
+    .lead {
+      max-width: 28ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: rise 0.9s ease 0.35s forwards;
+    }
+
+    ul {
+      list-style: none;
+      display: grid;
+      gap: 16px;
+    }
+
+    li {
+      position: relative;
+      padding: 22px 24px 22px 28px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+      opacity: 0;
+      translate: 0 18px;
+      animation: rise 0.7s ease forwards;
+      transition: transform 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+    }
+
+    li:nth-child(1) { animation-delay: 0.5s; }
+    li:nth-child(2) { animation-delay: 0.65s; }
+    li:nth-child(3) { animation-delay: 0.8s; }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.35s ease;
+    }
+
+    li:hover {
+      transform: translateY(-6px);
+      background: var(--card-hover);
+      border-color: var(--accent-soft);
+    }
+
+    li:hover::before {
+      transform: scaleY(1);
+    }
+
+    .item-label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .item-title {
+      font-size: 1.18rem;
+      font-weight: 500;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        translate: 0 18px;
+      }
+      to {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .glow,
+      .eyebrow,
+      h1,
+      .lead,
+      li {
+        animation: none;
+        opacity: 1;
+        translate: 0;
+      }
+    }
+
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to { transform: translate(40px, 28px) scale(1.12); }
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 48px 20px 64px;
+      }
+
+      li {
+        padding: 18px 18px 18px 22px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>10 идей</h1>
-  <ul>
-    <li>5 идей постов для экспертов</li>
-    <li>3 идеи сторис на сегодня</li>
-    <li>контент план на неделю</li>
-  </ul>
+  <div class="glow glow-a"></div>
+  <div class="glow glow-b"></div>
+  <main class="page">
+    <p class="eyebrow">контент-студия</p>
+    <h1>10 идей</h1>
+    <p class="lead">Подборка форматов, чтобы быстро собрать посты, сторис и план на неделю.</p>
+    <ul>
+      <li>
+        <span class="item-label">01 — экспертность</span>
+        <span class="item-title">5 идей постов для экспертов</span>
+      </li>
+      <li>
+        <span class="item-label">02 — сторис</span>
+        <span class="item-title">3 идеи сторис на сегодня</span>
+      </li>
+      <li>
+        <span class="item-label">03 — план</span>
+        <span class="item-title">Контент-план на неделю</span>
+      </li>
+    </ul>
+  </main>
 </body>
 </html>
